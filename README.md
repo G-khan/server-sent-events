@@ -1,7 +1,6 @@
 # Sample Live Score app - Spring Boot Reactive Webflux Server-Sent Events
 
 This is a sample live score application that shows how to use Server-Sent Events:
-- Spring Boot 2
 - Spring Webflux
 
 ## Article
