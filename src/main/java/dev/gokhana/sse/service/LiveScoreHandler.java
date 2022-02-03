@@ -10,18 +10,18 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
 
 @Service
-public class CampaignProcessor {
+public class LiveScoreHandler {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CampaignProcessor.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(LiveScoreHandler.class);
 
     private final List<Consumer<LiveScore>> listeners = new CopyOnWriteArrayList<>();
 
-    public void consumer(Consumer<LiveScore> listener) {
+    public void subscribe(Consumer<LiveScore> listener) {
         listeners.add(listener);
         LOGGER.info("New one added, total consumer: {}", listeners.size());
     }
 
-    public void process(LiveScore liveScore) {
+    public void publish(LiveScore liveScore) {
         LOGGER.info("Processing live score: {}", liveScore);
         listeners.forEach(listener -> listener.accept(liveScore));
     }

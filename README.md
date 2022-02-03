@@ -21,21 +21,14 @@ This will start the application on port 8080.
 curl --location --request POST 'http://localhost:8080/api/v1/live-scores' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    "homeTeam": "GS",
-    "awayTeam": "FB",
-    "homeScore": 3,
-    "awayScore": 0
+    "homeTeam": "Arsenal",
+    "awayTeam": "Tottenham",
+    "homeScore": 1,
+    "awayScore": 1
 }' 
 ```
 
 ### Starting the Server Sent Events for consuming live scores
 ```
-curl --location --request POST 'http://localhost:8080/api/v1/live-scores' \
---header 'Content-Type: application/json' \
---data-raw '{
-"homeTeam": "GS",
-"awayTeam": "FB",
-"homeScore": 3,
-"awayScore": 0
-}' 
+curl --location --request GET 'http://localhost:8080/api/v1/live-scores'
 ```
