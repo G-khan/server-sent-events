@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -31,7 +32,8 @@ public class LiveScoreController {
     }
 
     @GetMapping(path = "/live-scores", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Flux<LiveScore> consumer() {
-        return Flux.create(sink -> processor.subscribe(sink::next));
+    public Flux<ServerSentEvent<Object>> consumer() {
+        return Flux.create(sink -> processor.subscribe(sink::next)).map(
+                liveScore -> ServerSentEvent.builder().data(liveScore).event("goal").build());
     }
 }
